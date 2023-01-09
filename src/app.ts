@@ -1,16 +1,17 @@
+// 타입스크립트를 쓰면 express 선언전에 dotenv.config 해줘야함
+import dotenv from 'dotenv';
+dotenv.config();
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
 
 import routes from './routes';
-
-dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(morgan('combined'));
+app.use(express.json());
 app.use(routes);
 
 app.get('/ping', (req: Request, res: Response, next: NextFunction) => {
