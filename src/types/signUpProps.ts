@@ -1,5 +1,8 @@
-export default interface signUpProps {
-	name: string;
+export interface signInProps {
 	email: string;
 	password: string;
+}
+
+export interface signUpProps extends signInProps {
+	name: string;
 }
