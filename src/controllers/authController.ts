@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import authService from '../services/authService';
 import CustomError from '../types/CustomError';
+import authService from '../services/authService';
 
-const signUp = async (req: Request, res: Response, nest: NextFunction) => {
+const signUp = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { name, email, password } = req.body;
 
