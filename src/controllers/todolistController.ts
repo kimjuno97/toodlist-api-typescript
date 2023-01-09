@@ -10,7 +10,7 @@ const addTodoList = async (req: Request, res: Response, next: NextFunction) => {
 			return res.status(400).json({ message: 'MISSING_TODO_VALUE' });
 		}
 
-		const todoInfo = todolistService.addTodoList({
+		const todoInfo = await todolistService.addTodoList({
 			userId,
 			todo,
 			isCompleted,

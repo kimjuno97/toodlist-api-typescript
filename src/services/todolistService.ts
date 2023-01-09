@@ -1,8 +1,5 @@
-import jwt from 'jsonwebtoken';
-
 import todolistDao from '../models/todolistDao';
 
-import CustomError from '../types/CustomError';
 import todoListProps from '../types/todoListProps';
 
 interface TypeTodoInfo {

@@ -5,6 +5,6 @@ import validateToken from '../middlewere/validateToken';
 
 const todolistRouter = express.Router();
 
-todolistRouter.post('/todo', validateToken, todolistController.addTodoList);
+todolistRouter.post('/', validateToken, todolistController.addTodoList);
 
 export default todolistRouter;

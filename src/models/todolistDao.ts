@@ -9,15 +9,16 @@ const addTodoList = async ({ userId, todo, isCompleted }: todoListProps) => {
             INSERT INTO todolist (
                 user_id,
                 todo,
-            ) VALUES (?, ?, ?);
-        `,
-			[userId, todo]
+                is_completed
+                ) VALUES (?, ?, ?);
+                `,
+			[userId, todo, isCompleted]
 		);
 
 		return await database.query(
 			`SELECT id, todo, is_completed
             FROM todolist t
-            WHERE t.userId=? AND t.todo=? 
+            WHERE t.user_id=? AND t.todo=? 
             AND t.is_completed=?`,
 			[userId, todo, isCompleted]
 		);
