@@ -1,21 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
 import CustomError from '../types/CustomError';
-import AuthRequest from '../types/AuthRequest';
 import todolistService from '../services/todolistService';
 
-const addTodoList = async (
-	req: AuthRequest,
-	res: Response,
-	next: NextFunction
-) => {
+const addTodoList = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { todo, isCompleted } = req.body;
-		const { userId } = req.user;
+		const { userId, todo, isCompleted } = req.body;
+
 		if (!todo) {
 			return res.status(400).json({ message: 'MISSING_TODO_VALUE' });
 		}
 
-		const todoInfo = todolistService.addTodoList({ userId, todo, isCompleted });
+		const todoInfo = todolistService.addTodoList({
+			userId,
+			todo,
+			isCompleted,
+		});
 
 		return res.status(201).json({
 			todo: todoInfo,
