@@ -30,8 +30,21 @@ const addTodoList = async ({
 	}
 };
 
-const getTodoList = async (userId: number) => {
-	const todoList = await todolistDao.getTodoList(userId);
+const getTodoList = async ({
+	userId,
+	limit = '5',
+	offset = '0',
+}: {
+	userId: number;
+	limit: string;
+	offset: string;
+}) => {
+	console.log('limit,offet', limit, offset);
+	const todoList = await todolistDao.getTodoList({
+		userId,
+		limit,
+		offset,
+	});
 
 	return todoList.map(({ id, todo, is_completed }: TypeTodoInfo) => ({
 		id,

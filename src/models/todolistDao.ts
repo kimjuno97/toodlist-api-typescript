@@ -28,12 +28,22 @@ const addTodoList = async ({ userId, todo, isCompleted }: todoListProps) => {
 	}
 };
 
-const getTodoList = async (userId: number) => {
+const getTodoList = async ({
+	userId,
+	limit,
+	offset,
+}: {
+	userId: number;
+	limit: string;
+	offset: string;
+}) => {
 	try {
 		return await database.query(
 			`SELECT id, todo, is_completed
 			FROM todolist
-			WHERE todolist.user_id='${userId}'`
+			WHERE todolist.user_id='${userId}'
+			ORDER BY todolist.id DESC
+			LIMIT ${limit} OFFSET ${offset}`
 		);
 	} catch (err) {
 		const error = new CustomError('INVALID_DATA_INPUT');
