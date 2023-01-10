@@ -7,5 +7,6 @@ const todolistRouter = express.Router();
 
 todolistRouter.post('/', validateToken, todolistController.addTodoList);
 todolistRouter.get('/', validateToken, todolistController.getTodoList);
+todolistRouter.put('/', validateToken, todolistController.updateTodo);
 
 export default todolistRouter;

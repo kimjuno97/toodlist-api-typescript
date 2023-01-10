@@ -40,9 +40,14 @@ const getTodoList = async (userId: number) => {
 	}));
 };
 
+const updateTodo = async ({ id, userId, todo, isCompleted }: todoListProps) => {
+	await todolistDao.updateTodo({ id, userId, todo, isCompleted });
+};
+
 const todolistService = {
 	addTodoList,
 	getTodoList,
+	updateTodo,
 };
 
 export default todolistService;

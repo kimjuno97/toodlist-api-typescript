@@ -40,9 +40,24 @@ const getTodoList = async (req: Request, res: Response) => {
 	}
 };
 
+const updateTodo = async (req: Request, res: Response) => {
+	try {
+		const { id, userId, todo, isCompleted } = req.body;
+
+		await todolistService.updateTodo({ id, userId, todo, isCompleted });
+
+		return res.status(201).json({ message: 'SUCCESS_UPDATE' });
+	} catch (err) {
+		if (err instanceof CustomError) {
+			return res.status(err.statusCode || 500).json({ message: err.message });
+		}
+	}
+};
+
 const todolistController = {
 	addTodoList,
 	getTodoList,
+	updateTodo,
 };
 
 export default todolistController;
