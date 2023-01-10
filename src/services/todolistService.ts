@@ -44,10 +44,15 @@ const updateTodo = async ({ id, userId, todo, isCompleted }: todoListProps) => {
 	await todolistDao.updateTodo({ id, userId, todo, isCompleted });
 };
 
+const deleteTodo = async (id: number) => {
+	await todolistDao.deleteTodo(id);
+};
+
 const todolistService = {
 	addTodoList,
 	getTodoList,
 	updateTodo,
+	deleteTodo,
 };
 
 export default todolistService;

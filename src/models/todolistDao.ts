@@ -55,10 +55,20 @@ const updateTodo = async ({ id, userId, todo, isCompleted }: todoListProps) => {
 	}
 };
 
+const deleteTodo = async (id: number) => {
+	try {
+		await database.query(`DELETE FROM todolist WHERE id = '${id}';`);
+	} catch (err) {
+		const error = new CustomError('INVALID_DATA_INPUP');
+		error.statusCode = 400;
+	}
+};
+
 const todolistDao = {
 	addTodoList,
 	getTodoList,
 	updateTodo,
+	deleteTodo,
 };
 
 export default todolistDao;
