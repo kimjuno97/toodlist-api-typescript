@@ -28,8 +28,22 @@ const addTodoList = async ({ userId, todo, isCompleted }: todoListProps) => {
 	}
 };
 
+const getTodoList = async (userId: number) => {
+	try {
+		return await database.query(
+			`SELECT id, todo, is_completed
+			FROM todolist
+			WHERE todolist.user_id='${userId}'`
+		);
+	} catch (err) {
+		const error = new CustomError('INVALID_DATA_INPUT');
+		error.statusCode = 400;
+	}
+};
+
 const todolistDao = {
 	addTodoList,
+	getTodoList,
 };
 
 export default todolistDao;

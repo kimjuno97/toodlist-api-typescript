@@ -26,8 +26,23 @@ const addTodoList = async (req: Request, res: Response, next: NextFunction) => {
 	}
 };
 
+const getTodoList = async (req: Request, res: Response) => {
+	try {
+		const { userId } = req.body;
+
+		const todoList = await todolistService.getTodoList(userId);
+
+		return res.status(201).json({ todo: todoList });
+	} catch (err) {
+		if (err instanceof CustomError) {
+			return res.status(err.statusCode || 500).json({ message: err.message });
+		}
+	}
+};
+
 const todolistController = {
 	addTodoList,
+	getTodoList,
 };
 
 export default todolistController;

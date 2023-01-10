@@ -5,7 +5,7 @@ import todoListProps from '../types/todoListProps';
 interface TypeTodoInfo {
 	id: number;
 	todo: string;
-	is_completed: boolean;
+	is_completed: number | boolean;
 }
 
 const addTodoList = async ({
@@ -19,11 +19,30 @@ const addTodoList = async ({
 		isCompleted,
 	});
 
-	return addTodo;
+	{
+		let { id, todo, is_completed } = addTodo;
+		if (addTodo.is_completed === 0) {
+			is_completed = false;
+		} else {
+			is_completed = true;
+		}
+		return { id, todo, isCompleted: is_completed };
+	}
+};
+
+const getTodoList = async (userId: number) => {
+	const todoList = await todolistDao.getTodoList(userId);
+
+	return todoList.map(({ id, todo, is_completed }: TypeTodoInfo) => ({
+		id,
+		todo,
+		isCompleted: is_completed === 0 ? false : true,
+	}));
 };
 
 const todolistService = {
 	addTodoList,
+	getTodoList,
 };
 
 export default todolistService;
