@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"test": "DOTENV_CONFIG_PATH=.env.test jest --setupFiles=dotenv/config",
+		"test": "DOTENV_CONFIG_PATH=.env.test jest --setupFiles=dotenv/config --detectOpenHandles",
 		"start": "node dist/app.js",
 		"build": "tsc -p .",
 		"dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/server.ts"
@@ -38,7 +38,14 @@
 	},
 	"babel": {
 		"presets": [
-			"@babel/preset-env",
+			[
+				"@babel/preset-env",
+				{
+					"targets": {
+						"node": "current"
+					}
+				}
+			],
 			"@babel/preset-typescript"
 		]
 	}

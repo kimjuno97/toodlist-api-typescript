@@ -9,12 +9,9 @@ const database = new DataSource({
 	database: process.env.TYPEORM_DATABASE,
 });
 
-database
-	.initialize()
-	.then(() => console.log('Data souce has been initialized!'))
-	.catch(err => {
-		console.error('Error during Data Source initialization', err);
-		database.destroy();
-	});
+database.initialize().catch(err => {
+	console.error('Error during Data Source initialization', err);
+	database.destroy();
+});
 
 export default database;

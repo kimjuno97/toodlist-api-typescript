@@ -1,10 +1,10 @@
-import { jest } from '@jest/globals';
+// import { jest } from '@jest/globals';
 
-jest.useFakeTimers();
+// jest.useFakeTimers();
 
 import requsest from 'supertest';
 
-import createApp from '../src/app';
+import { createApp } from '../src/app';
 import database from '../src/models/dataSource';
 
 describe('sign Up', () => {
@@ -16,7 +16,9 @@ describe('sign Up', () => {
 	});
 
 	afterAll(async () => {
+		// await database.query(`TRUNCATE users`);
 		await database.query(`TRUNCATE users`);
+		await database.query(`TRUNCATE todolist`);
 		await database.destroy();
 	});
 
@@ -29,6 +31,9 @@ describe('sign Up', () => {
 				password: 'password12!Q',
 			})
 			.expect(201)
-			.expect({ message: 'SUCCESS SIGN UP' });
+			.expect({
+				message: 'SIGNUP_SUCESS',
+				TOKEN: '',
+			});
 	});
 });
